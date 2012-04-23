@@ -1,0 +1,8 @@
+http://en.wikipedia.org/w/api.php gives command definitions
+
+the main thing to get the last 500 editions to the talk page. look at prop=revisions in the api description if you
+want more details.
+action=query&titles=Talk:San%20Francisco&format=xml&prop=revisions&rvlimit=500
+
+to get a 'user profile':
+action=query&list=allusers&aufrom=ClueBot&auprop=blockinfo|groups|implicitgroups|rights|editcount|registration&format=xml&aulimit=1
