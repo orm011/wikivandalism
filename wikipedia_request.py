@@ -11,7 +11,7 @@ from user_talk_vandal_vocab_ratio import *
 from user_revision_count import *
 from user_talk_revision_count import *
 from user_article_to_edit_ratio import *
-
+from edited_article_user_num_edits import *
 
 
 def join_edits_with_feature_on_user(feature_function, edits):
@@ -19,7 +19,12 @@ def join_edits_with_feature_on_user(feature_function, edits):
     result = []
     for edit in edits:
         try:
-            result.append((feature_function(edit['user']), 
+            featureval = 0
+            if feature_function.__name__[0:4] == 'edit':
+                featureval = feature_function(edit)
+            else:
+                featureval = feature_function(edit['user'])
+            result.append((featureval, 
                            int(edit['isVandalism'] == 'true')))
         except:
             print 'error requesting for: ', edit['user'], 'moving on...'
