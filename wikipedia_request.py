@@ -42,3 +42,15 @@ def example():
     x = join_edits_with_feature_on_user(examplefeature, exampleset)
     dump_to_csv(x, "examplefeature.csv")
 
+def feature_to_text(feature_function, number_of_examples=10, trialxmlpath = "../workspace/cluebotng/editsets/D/trial.xml"):
+    """use this to get a new feature for the dataset stored into a file"""
+    print 'reading training set from ' + trialxmlpath
+    trainingset = trial_file_reader.parse_trial_file(trialxmlpath)
+    print 'done reading training set'
+    if number_of_examples <= 0:
+        exampleset = trainingset[:]
+    else:
+        exampleset = trainingset[0:number_of_examples]
+    x = join_edits_with_feature_on_user(feature_function, exampleset)
+    filename = feature_function.__name__ + '.csv'
+    dump_to_csv(x, filename)

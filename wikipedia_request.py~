@@ -12,14 +12,7 @@ from user_revision_count import *
 from user_talk_revision_count import *
 
 
-def get_user_page_revisions(json_result):
-    """returns a list of page edits"""
-    parsed = simplejson.loads(json_result)
-    try:
-        return parsed.items()[0][1].items()[0][1].values()[0]['revisions']
-    except:
-        ##users without profile have no results in revisions
-        return []
+
 
 def join_edits_with_feature_on_user(feature_function, edits):
     """edits are the output from parsing trial.xml"""
@@ -49,3 +42,14 @@ def example():
     x = join_edits_with_feature_on_user(examplefeature, exampleset)
     dump_to_csv(x, "examplefeature.csv")
 
+def feature_to_text(feature_function, number_of_examples=10, trialxmlpath = "../workspace/cluebotng/editsets/D/trial.xml"):
+    """use this to get a new feature for the dataset stored into a file"""
+    print 'reading training set from ', trialxmlpath
+    trainingset = trial_file_reader.parse_trial_file(trialxmlpath)
+    if number_of_examples <= 0:
+        exampleset = trainingset[:]
+    else:
+        exampleset = trainingset[0:number_of_examples]
+    x = join_edits_with_feature_on_user(feature_function, exampleset)
+    filename = feature_function.__name__ + '.csv'
+    dump_to_csv(x, filename)
