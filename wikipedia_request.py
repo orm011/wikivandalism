@@ -10,7 +10,7 @@ from user_talk_vandal_vocab_count import *
 from user_talk_vandal_vocab_ratio import *
 from user_revision_count import *
 from user_talk_revision_count import *
-
+from user_article_to_edit_ratio import *
 
 
 
