@@ -65,7 +65,8 @@ def join_edits_with_feature_on_user(feature_function, edits):
     result = []
     for edit in edits:
         try:
-            result.append((feature_function(edit['user']), int(edit['isVandalism'] == 'true')))
+            result.append((feature_function(edit['user']), 
+                           int(edit['isVandalism'] == 'true')))
         except:
             print 'error requesting for: ', edit['user'], 'moving on...'
             
@@ -79,12 +80,22 @@ def dump_to_csv(tuple_list, file_name):
     f.close()
     
 def example():
+    """example of how you can use the functions in this file"""
     trialxmlpath = "../workspace/cluebotng/editsets/D/trial.xml"
     trainingset = trial_file_reader.parse_trial_file(trialxmlpath)
     exampleset = trainingset[0:10]
     examplefeature = user_talk_revision_count #user feature defined above
     x = join_edits_with_feature_on_user(examplefeature, exampleset)
     dump_to_csv(x, "examplefeature.csv")
+
+def feature_to_text(feature_function, trialxmlpath, number_of_examples):
+    """use this to get a new feature for the dataset stored into a file"""
+    trainingset = trial_file_reader.parse_trial_file(trialxmlpath)
+    exampleset = trainingset[0:number_of_examples]
+    x = join_edits_with_feature_on_user(feature_function, exampleset)
+    filename = feature_function.__name__ + '.csv'
+    dump_to_csv(x, filename)
+
 
 def user_talk_vandal_vocab_count(username):
     req = construct_user_talk_page_contents_request(username, 500)
