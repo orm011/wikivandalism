@@ -36,7 +36,6 @@ def make_wikipedia_request_json(req):
 def get_user_page_revisions(json_result):
     """returns a list of page edits"""
     parsed = simplejson.loads(json_result)
-    print parsed
     try:
         return parsed.items()[0][1].items()[0][1].values()[0]['revisions']
     except:
