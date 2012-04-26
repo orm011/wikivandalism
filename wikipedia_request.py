@@ -11,8 +11,10 @@ from user_talk_vandal_vocab_ratio import *
 from user_revision_count import *
 from user_talk_revision_count import *
 from user_article_to_edit_ratio import *
-from edited_article_user_num_edits import *
+from user_empty_comment_ratio import *
+from user_comment_avg_length import *
 
+from edited_article_user_num_edits import *
 
 def join_edits_with_feature_on_user(feature_function, edits):
     """edits are the output from parsing trial.xml"""
@@ -60,19 +62,7 @@ def feature_to_text(feature_function, number_of_examples=10, trialxmlpath = "../
     filename = feature_function.__name__ + '.csv'
     dump_to_csv(x, filename)
 
-def user_empty_comment_ratio(username):
-    query = 'http://en.wikipedia.org/w/api.php?action=query&list=usercontribs&ucuser=' + username + '&uclimit=500&ucdir=older&format=json'
-    jsonobj = make_wikipedia_request_json(query)
-    commented = 0
-    total = 0
-    for entries in jsonobj['query']['usercontribs']:
-        if entries['comment'] == "":
-            total +=1
-        else:
-            total +=1
-            commented +=1
-    if total == 0:
-        return 0
-    return float(commented)/total
 
-    
+
+
+
