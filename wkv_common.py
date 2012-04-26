@@ -5,19 +5,26 @@ import csv
 """ for the example only"""
 import trial_file_reader
 
+import redis
+rdb = redis.StrictRedis(host='localhost', port=6379, db=0)
+print 'connected to redis database'
+
 class WikipediaError(Exception):
     pass
 
 
 def make_wikipedia_request(req):
     """connects to wikipedia and collects answer"""
+    rcached = rdb.get(req)
+    if rcached:
+      return rcached
     try:
         res = requests.get(req)
         if not res.ok:
             raise  WikipediaError, res.error
     except:
             raise  WikipediaError
-        
+    rdb.set(req, res.text)
     return res.text
 
 def make_wikipedia_request_json(req):
