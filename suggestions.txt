@@ -1,0 +1,29 @@
+##alternative definition of security goal
+	  -machine learning in adversarial situations
+	  -right now: improve detection of vandal edits (compared to ClueBotNG)
+	  -other ways we define a win?
+##reduce amount of vandalism:
+	-eg rate limit
+	-enforce subscription
+	-geographic information. 
+	-detection (our focus so far)
+##vandalism detection (improve classifier performance):
+	 -add features
+	 -run 
+
+##specific ideas for features:
+-feature idea: series of  edit times for a user
+-feature idea: feedback (reviewers, votes)
+-hopefully these 4 features give new things
+-how many edits come from first time users (and how much of it is vandalism)
+-ip addresses
+
+##deadlines:
+
+##goals:
+	-3 days (by sunday 29th) should have enough *good* features, ie good correlation > 0.2
+	-3 days (by Wednesday 2nd) should have cluebot ng running with new features
+	-4 days later (by sundahy 6th) try to get the performance higher (eg 5%)
+	-security defn. in slides.
+	-presentation may 9th (no geza then) or 14th
+	-report may 16thki
