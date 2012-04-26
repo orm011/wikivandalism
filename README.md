@@ -1,7 +1,7 @@
 wikivandalism
 =============
 
-857 project about vandalism in wikipedia
+6.857 project about vandalism in wikipedia
 
 ## Prereqs
 sudo apt-get install redis-server
