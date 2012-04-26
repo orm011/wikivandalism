@@ -1,7 +1,7 @@
 from wkv_common import *
 
 def user_comment_avg_length(username):
-    query = 'http://en.wikipedia.org/w/api.php?action=query&list=usercontribs&ucuser=' + username + '&uclimit=100&ucdir=older&format=json'
+    query = 'http://en.wikipedia.org/w/api.php?action=query&list=usercontribs&ucuser=' + username + '&uclimit=500&ucdir=older&format=json'
     jsonobj = make_wikipedia_request_json(query)
     length_sum = 0
     total = 0
