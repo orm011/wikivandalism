@@ -54,3 +54,20 @@ def feature_to_text(feature_function, number_of_examples=10, trialxmlpath = "../
     x = join_edits_with_feature_on_user(feature_function, exampleset)
     filename = feature_function.__name__ + '.csv'
     dump_to_csv(x, filename)
+
+def user_empty_comment_ratio(username):
+    query = 'http://en.wikipedia.org/w/api.php?action=query&list=usercontribs&ucuser=' + username + '&uclimit=500&ucdir=older&format=json'
+    jsonobj = make_wikipedia_request_json(query)
+    commented = 0
+    total = 0
+    for entries in jsonobj['query']['usercontribs']:
+        if entries['comment'] == "":
+            total +=1
+        else:
+            total +=1
+            commented +=1
+    if total == 0:
+        return 0
+    return float(commented)/total
+
+    
