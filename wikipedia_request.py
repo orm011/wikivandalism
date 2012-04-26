@@ -1,5 +1,10 @@
 import requests
 import simplejson
+import csv
+
+""" for the example only"""
+import trial_file_reader
+
 
 __wikipedia_query="http://en.wikipedia.org/w/api.php?action=query"
 
@@ -48,7 +53,38 @@ def user_revision_count(username):
 
 def user_talk_revision_count(username):
     req = construct_user_talk_page_edits_request(username, 500)
-    return len(make_wikipedia_request_json(req)['query']['pages'].values()[0]['revisions'])
+    try:
+        count = len(make_wikipedia_request_json(req)['query']['pages'].values()[0]['revisions'])
+    except:
+        count = 0
+
+    return count
+
+def join_edits_with_feature_on_user(feature_function, edits):
+    """edits are the output from parsing trial.xml"""
+    result = []
+    for edit in edits:
+        try:
+            result.append((feature_function(edit['user']), int(edit['isVandalism'] == 'true')))
+        except:
+            print 'error requesting for: ', edit['user'], 'moving on...'
+            
+    return result
+
+def dump_to_csv(tuple_list, file_name):
+    f = open(file_name, "w")
+    wr = csv.writer(f)
+    for tup in tuple_list:
+        wr.writerow(tup)
+    f.close()
+    
+def example():
+    trialxmlpath = "../workspace/cluebotng/editsets/D/trial.xml"
+    trainingset = trial_file_reader.parse_trial_file(trialxmlpath)
+    exampleset = trainingset[0:10]
+    examplefeature = user_talk_revision_count #user feature defined above
+    x = join_edits_with_feature_on_user(examplefeature, exampleset)
+    dump_to_csv(x, "examplefeature.csv")
 
 def user_talk_vandal_vocab_count(username):
     req = construct_user_talk_page_contents_request(username, 500)
