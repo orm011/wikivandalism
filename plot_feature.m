@@ -10,7 +10,7 @@ if length(args) == 0
 end
 
 if length(args) > 1
-  cutoff = sscanf(args{2}, "%d")
+  cutoff = sscanf(args{2}, "%f")
   data(:,1) = data(:,1) > cutoff;
   data(:,1) = data(:,1)  + randn(length(data), 1)/10;
 end
