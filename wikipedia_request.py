@@ -14,9 +14,10 @@ from user_article_to_edit_ratio import *
 from user_empty_comment_ratio import *
 from user_comment_avg_length import *
 
-from user_external_link_ratio import *
+#from user_external_link_ratio import *
 
 from edited_article_user_num_edits import *
+from user_has_edited_talk_page import *
 
 def join_edits_with_feature_on_user(feature_function, edits):
     """edits are the output from parsing trial.xml"""
