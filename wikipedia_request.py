@@ -10,6 +10,9 @@ def construct_user_page_edits_request(username, limit):
 def construct_user_talk_page_edits_request(username, limit):
     return  __wikipedia_query + "&titles=User_talk:" + username + "&prop=revisions" + "&format=json" + "&rvlimit="  + str(limit)
 
+def construct_user_talk_page_contents_request(username, limit):
+    return  __wikipedia_query + "&titles=User_talk:" + username + "&prop=revisions&rvprop=comment|tags|content" + "&format=json" + "&rvlimit="  + str(limit)
+
 class WikipediaError(Exception):
     pass
 
@@ -47,3 +50,14 @@ def user_talk_revision_count(username):
     req = construct_user_talk_page_edits_request(username, 500)
     return len(make_wikipedia_request_json(req)['query']['pages'].values()[0]['revisions'])
 
+def user_talk_vandal_vocab_count(username):
+    req = construct_user_talk_page_contents_request(username, 500)
+    jsontxt = make_wikipedia_request(req)
+    vandalvocab = ['unconstructive', 'revert', 'vandal', 'block', 'warn']
+    wordsInText = jsontxt.replace(',', ' ').split(' ')
+    vandalwordcount = 0
+    for vandalword in vandalvocab:
+        for w in wordsInText:
+            if vandalword in w:
+                vandalwordcount += 1
+    return vandalwordcount
