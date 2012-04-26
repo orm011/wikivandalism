@@ -3,9 +3,10 @@ wikivandalism
 
 6.857 project about vandalism in wikipedia
 
-## Prereqs
-sudo apt-get install redis-server
-sudo pip install redis requests
+## Installing Prerequisites
+
+    sudo apt-get install redis-server
+    sudo pip install redis requests
 
 ## To add a feature
 Create a file feature_name.py, containing a function which returns a numeric value (ex: see user_empty_comment_ratio.py)
