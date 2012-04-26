@@ -18,13 +18,15 @@ def make_wikipedia_request(req):
     rcached = rdb.get(req)
     if rcached:
       return rcached
+    print 'requesting', req
     try:
-        res = requests.get(req)
+        res = requests.get(req, timeout=1.0)
         if not res.ok:
             raise  WikipediaError, res.error
     except:
             raise  WikipediaError
     rdb.set(req, res.text)
+    print 'successful', req
     return res.text
 
 def make_wikipedia_request_json(req):
