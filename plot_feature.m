@@ -23,4 +23,5 @@ ylabel("is vandalism")
 title(sprintf("feature %s, correlation with vandalism = %f", \
 		       xlab, corrcoef(data(:,1), data(:,2))))
 
-sleep(10);
+print([xlab, '.png'], '-dpng')
+
