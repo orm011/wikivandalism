@@ -14,3 +14,4 @@ def user_comment_avg_length(username):
     if total == 0:
         return 0
     return float(length_sum)/total
+

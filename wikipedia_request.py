@@ -13,6 +13,7 @@ from user_talk_revision_count import *
 from user_article_to_edit_ratio import *
 from user_empty_comment_ratio import *
 from user_comment_avg_length import *
+from user_edit_to_reversion_ratio import *
 
 #from user_external_link_ratio import *
 
