@@ -20,6 +20,15 @@ from user_edit_to_reversion_ratio import *
 from edited_article_user_num_edits import *
 from user_has_edited_talk_page import *
 
+from user_is_ip_address import *
+from user_is_bot import *
+from user_uses_editing_tool import *
+from username_has_capitals import *
+from username_has_numbers import *
+from username_ends_with_numbers import *
+from editor_started_article import *
+
+
 def join_edits_with_feature_on_user(feature_function, edits):
     """edits are the output from parsing trial.xml"""
     result = []
