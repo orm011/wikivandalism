@@ -28,7 +28,6 @@ from username_has_numbers import *
 from username_ends_with_numbers import *
 from editor_started_article import *
 
-
 def join_edits_with_feature_on_user(feature_function, edits):
     """edits are the output from parsing trial.xml"""
     result = []
@@ -41,6 +40,22 @@ def join_edits_with_feature_on_user(feature_function, edits):
                 featureval = feature_function(edit['user'])
             result.append((featureval, 
                            int(edit['isVandalism'] == 'true')))
+        except:
+            print 'error requesting for: ', edit['user'], 'moving on...'
+            
+    return result
+
+def join_editid_with_feature(feature_function, edits):
+    """edits are the output from parsing trial.xml"""
+    result = []
+    for edit in edits:
+        try:
+            featureval = 0
+            if feature_function.__name__[0:4] == 'edit':
+                featureval = feature_function(edit)
+            else:
+                featureval = feature_function(edit['user'])
+            result.append((edit['EditID'], featureval))
         except:
             print 'error requesting for: ', edit['user'], 'moving on...'
             
@@ -75,7 +90,14 @@ def feature_to_text(feature_function, number_of_examples=10, trialxmlpath = "../
     filename = feature_function.__name__ + '.csv'
     dump_to_csv(x, filename)
 
-
+def editid_to_featurevalues(feature_function, trialxmlpath = "../workspace/cluebotng/editsets/D/trial.xml"):
+    """use this to get a new feature for the dataset stored into a file"""
+    print 'reading training set from ' + trialxmlpath
+    exampleset = trial_file_reader.parse_trial_file(trialxmlpath)
+    print 'done reading training set'
+    x = join_editid_with_feature(feature_function, exampleset)
+    filename = feature_function.__name__ + '.dat'
+    dump_to_csv(x, filename)
 
 
 
