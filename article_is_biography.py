@@ -16,3 +16,6 @@ def test_article_is_living_person():
     assert article_is_living_person("Barack Obama")
     assert not article_is_living_person("Talk:User Rimoll")
     print("success")
+
+def article_is_biography(editinfo):
+    return int(article_is_living_person(editinfo['title']))

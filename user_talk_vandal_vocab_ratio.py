@@ -2,7 +2,8 @@ from wkv_common import *
 from user_talk_vandal_vocab_count import *
 from user_talk_revision_count import *
 
-def user_talk_vandal_vocab_ratio(username):
+def user_talk_vandal_vocab_ratio(editinfo):
+    username = editinfo['user']
     revision_count = user_talk_revision_count(username)
     if revision_count == 0:
         return 0

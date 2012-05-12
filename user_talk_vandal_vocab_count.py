@@ -1,6 +1,7 @@
 from wkv_common import *
 
-def user_talk_vandal_vocab_count(username):
+def user_talk_vandal_vocab_count(editinfo):
+    username = editinfo['user']
     req = construct_user_talk_page_contents_request(username, 500)
     jsontxt = make_wikipedia_request(req)
     vandalvocab = ['unconstructive', 'revert', 'vandal', 'block', 'warn']

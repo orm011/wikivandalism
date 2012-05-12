@@ -28,16 +28,15 @@ from username_has_numbers import *
 from username_ends_with_numbers import *
 from editor_started_article import *
 
+from article_is_biography import *
+
 def join_edits_with_feature_on_user(feature_function, edits):
     """edits are the output from parsing trial.xml"""
     result = []
     for edit in edits:
         try:
             featureval = 0
-            if feature_function.__name__[0:4] == 'edit':
-                featureval = feature_function(edit)
-            else:
-                featureval = feature_function(edit['user'])
+            featureval = feature_function(edit)
             result.append((featureval, 
                            int(edit['isVandalism'] == 'true')))
         except:
@@ -51,10 +50,7 @@ def join_editid_with_feature(feature_function, edits):
     for edit in edits:
         try:
             featureval = 0
-            if feature_function.__name__[0:4] == 'edit':
-                featureval = feature_function(edit)
-            else:
-                featureval = feature_function(edit['user'])
+            featureval = feature_function(edit)
             result.append((edit['EditID'], featureval))
         except:
             print 'error requesting for: ', edit['user'], 'moving on...'
