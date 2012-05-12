@@ -38,6 +38,10 @@ from is_australia_ip import *
 from is_africa_ip import *
 from is_south_america_ip import *
 
+from user_num_groups import *
+#from user_wiki_age_dif import *
+from user_average_article_newness import *
+
 def join_edits_with_feature_on_user(feature_function, edits):
     """edits are the output from parsing trial.xml"""
     result = []

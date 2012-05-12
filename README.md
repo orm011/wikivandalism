@@ -9,11 +9,7 @@ wikivandalism
     sudo pip install redis requests
 
 ## To add a feature
-Create a file feature_name.py, containing a function which returns a numeric value (ex: see user_empty_comment_ratio.py)
-
-    def feature_name(username):
-
-Or if you need more than just username, start the name with 'edit' and you'll get a dictionary (ex: see edited_article_user_num_edits.py)
+Create a file feature_name.py, containing a function which takes info in a dictionary, and returns a numeric value (ex: see edited_article_user_num_edits.py)
 
     def edit_feature_name(editinfo):
 
