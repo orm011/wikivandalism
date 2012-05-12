@@ -29,6 +29,14 @@ from username_ends_with_numbers import *
 from editor_started_article import *
 
 from article_is_biography import *
+from article_is_protected import *
+
+from is_asia_ip import *
+from is_europe_ip import *
+from is_north_america_ip import *
+from is_australia_ip import *
+from is_africa_ip import *
+from is_south_america_ip import *
 
 def join_edits_with_feature_on_user(feature_function, edits):
     """edits are the output from parsing trial.xml"""
