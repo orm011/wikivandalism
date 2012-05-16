@@ -42,6 +42,13 @@ from user_num_groups import *
 #from user_wiki_age_dif import *
 from user_average_article_newness import *
 
+from user_total_num_edits import *
+from user_at_least_2_edits import *
+from user_at_least_10_edits import *
+from user_at_least_30_edits import *
+from user_at_least_100_edits import *
+from user_at_least_200_edits import *
+
 def join_edits_with_feature_on_user(feature_function, edits):
     """edits are the output from parsing trial.xml"""
     result = []
