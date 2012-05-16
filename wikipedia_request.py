@@ -44,6 +44,7 @@ from user_average_article_newness import *
 
 from user_total_num_edits import *
 from user_at_least_2_edits import *
+from user_at_least_5_edits import *
 from user_at_least_10_edits import *
 from user_at_least_30_edits import *
 from user_at_least_100_edits import *
